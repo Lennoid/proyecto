@@ -1,7 +1,7 @@
 ---
 title: "Centro de datos"
 img: "centro-de-datos.webp"
-description: "Centros de datos en México: ¿Dónde están, qué son y cómo funcionan?"
+description: "Centros de datos: ¿Dónde están, qué son y cómo funcionan?"
 ---
 ## Son instalaciones diseñadas para albergar: 
 - Servidores

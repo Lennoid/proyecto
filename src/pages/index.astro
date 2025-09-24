@@ -1,15 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Articulo from '../components/articulo.astro';
-
 ---
 
 <Layout title="Página Principal">
-    <h1 class="bg-base-200 grid place-content-center text-6xl font-black text-white">
-        INFORMACIÓN
-    </h1>
+  <h1 
+    class="bg-base-200 grid place-content-center 
+           text-3xl sm:text-4xl md:text-6xl 
+           font-black text-white p-4 text-center">
+    INFORMACIÓN
+  </h1>
 
-	<div class="mt-10">
-        <Articulo />
-    </div>
+  <div class="mt-6 sm:mt-10 px-4 sm:px-6">
+    <Articulo />
+  </div>
 </Layout>
