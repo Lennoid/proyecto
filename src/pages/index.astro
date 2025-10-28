@@ -1,17 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Articulo from '../components/articulo.astro';
+import Layout from "../layouts/Layout.astro";
 ---
-
 <Layout title="Página Principal">
-  <h1 
-    class="bg-base-200 grid place-content-center 
-           text-3xl sm:text-4xl md:text-6xl 
-           font-black text-white p-4 text-center">
-    INFORMACIÓN DEL PRIMER PARCIAL
+  <h1 class="mt-6 bg-base-200 grid place-content-center text-3xl sm:text-4xl md:text-6xl font-black text-white p-4 text-center">
+    INFORMACIÓN DEL CUATRIMESTRE
   </h1>
 
-  <div class="mt-6 sm:mt-10 px-4 sm:px-6">
-    <Articulo />
+  <div class="flex flex-col justify-center items-center gap-6 mt-12 mb-12">
+    <a href="/parcial/articulos_primer/" class="bg-white text-gray-800 px-6 py-3 rounded-lg font-bold hover:bg-gray-800 hover:text-white w-auto text-bold text-3xl">
+      PRIMER PARCIAL
+    </a>
+    <a href="/parcial/articulos_segundo/" class="bg-white text-gray-800 px-6 py-3 rounded-lg font-bold hover:bg-gray-800 hover:text-white w-auto text-bold text-3xl">
+      SEGUNDO PARCIAL
+    </a>
+    <a href="/parcial/articulos_tercer/" class="bg-white text-gray-800 px-6 py-3 rounded-lg font-bold hover:bg-gray-800 hover:text-white w-auto text-bold text-3xl">
+      TERCER PARCIAL
+    </a>
   </div>
-</Layout>
+
+  </Layout>

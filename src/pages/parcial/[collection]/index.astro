@@ -1,0 +1,82 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Articulo from "../../../components/articulo.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  type CollectionKey = "articulos_primer" | "articulos_segundo" | "articulos_tercer";
+
+  const validCollections: CollectionKey[] = [
+    "articulos_primer",
+    "articulos_segundo",
+    "articulos_tercer",
+  ];
+
+  return validCollections.map((col) => ({
+    params: { collection: col },
+  }));
+}
+
+type CollectionKey = "articulos_primer" | "articulos_segundo" | "articulos_tercer";
+
+const { collection } = Astro.params;
+
+const validCollections: CollectionKey[] = [
+  "articulos_primer",
+  "articulos_segundo",
+  "articulos_tercer",
+];
+
+if (!validCollections.includes(collection as CollectionKey)) {
+  return new Response(null, { status: 404, statusText: "Not Found" });
+}
+
+const articulos = await getCollection(collection as CollectionKey);
+
+const titulos: Record<CollectionKey, string> = {
+  articulos_primer: "PRIMER PARCIAL",
+  articulos_segundo: "SEGUNDO PARCIAL",
+  articulos_tercer: "TERCER PARCIAL",
+};
+---
+
+<Layout title={titulos[collection]}>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-6">
+    <div class="relative">
+      
+      <h1
+        class="bg-base-200 grid place-content-center text-3xl sm:text-4xl md:text-6xl font-black text-white p-4 text-center"
+      >
+        {titulos[collection]}
+      </h1>
+
+      <a
+        href="/"
+        class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white hover:underline opacity-70"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon icon-tabler icon-tabler-arrow-left"
+          ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+            d="M5 12l14 0"></path><path d="M5 12l6 6"></path><path
+            d="M5 12l6 -6"></path></svg
+        >
+        <span class="hidden sm:inline">Volver al Menú</span>
+      </a>
+    </div>
+
+  
+
+  <div class="mt-6 sm:mt-10 px-4 sm:px-6">
+    <Articulo articulos={articulos} />
+  </div>
+</Layout>

@@ -1,13 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
 
-const articulos = await getCollection('articulos');
+type CollectionKey = "articulos_primer" | "articulos_segundo" | "articulos_tercer";
+
+interface Props {
+  articulos: CollectionEntry<CollectionKey>[];
+}
+
+const { articulos } = Astro.props as Props;
 ---
 
 <section aria-label="información">
   <div class="px-4 mx-auto max-w-screen-xl">
-    <!-- Grid: en móvil 1 columna, en md 2 columnas -->
     <div class="grid gap-8 md:grid-cols-2">
       {
         articulos.map(articulo => {
@@ -16,7 +21,7 @@ const articulos = await getCollection('articulos');
 
           return (
             <article class="flex flex-col md:flex-row items-center md:items-start bg-base-200 rounded-xl p-1">
-              <a href={`${slug}`} class="transition hover:scale-105">
+              <a href={`/parcial/${articulo.collection}/${articulo.slug}/`} class="transition hover:scale-105">
                 <img
                   transition:name={`img-${slug}`}
                   class="w-48 object-cover rounded-lg mx-auto md:mx-0 md:mr-5"

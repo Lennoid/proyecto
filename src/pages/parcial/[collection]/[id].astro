@@ -1,13 +1,23 @@
 ---
 import { getCollection, render } from "astro:content";
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../../layouts/Layout.astro';
 
 export async function getStaticPaths(){
-    const articulos = await getCollection('articulos');
-    return articulos.map((articulo) => ({
-        params: { id: articulo.slug },
-        props: { articulo }
-    }));
+    const collectionsNames = ['articulos_primer', 'articulos_segundo', 'articulos_tercer'] as const;
+
+    const paths = [];
+
+    for (const collectionName of collectionsNames) {
+        const articulos = await getCollection(collectionName);
+        for (const articulo of articulos) {
+            paths.push({
+                params: { collection: collectionName, id: articulo.slug },
+                props: { articulo }
+            });
+        }
+    }
+
+    return paths;
 }
 
 const { articulo } = Astro.props;
@@ -23,11 +33,11 @@ export const prerender = true
   <div class="flex flex-col md:flex-row gap-8 md:gap-12 justify-center mt-6">
 
     <aside class="flex flex-col items-center md:items-start gap-4">
-      <a href='/' class="hover:underline opacity-70 text-white">← Volver atrás</a>
+      <a href={`/parcial/${articulo.collection}/`} class="hover:underline opacity-70 text-white">← Volver atrás</a>
       <img
         transition:name={`img-${slug}`}
         class="rounded w-72 md:w-96 h-auto mx-auto md:mx-0"
-        src={`/${img}`}
+        src={`../../../${img}`}
         alt={title}
       />
     </aside>
